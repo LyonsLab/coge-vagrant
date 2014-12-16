@@ -51,10 +51,10 @@ apt-get update && apt-get install -y \
     aragorn \
     nodejs &> /dev/null
 
-#: Add node dependencies
+#: Add global node dependencies
 npm install -g bower
 
-#: Setup CPAN
+#: Setup CPAN Minus
 curl -L http://cpanmin.us | perl - App::cpanminus
 
 #: Setup mysql database

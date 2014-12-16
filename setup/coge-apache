@@ -1,0 +1,62 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/web
+
+    <Files ~ "\.(pl|cgi)$">
+        SetHandler perl-script
+        PerlResponseHandler ModPerl::Registry
+        Options +ExecCGI
+        PerlSendHeader On
+    </Files>
+
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel warn
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    ServerSignature On
+
+    <Directory />
+        PerlSetEnv COGE_HOME "/var/www/web"
+        AddHandler cgi-script .pl
+        Options FollowSymLinks
+        Require all granted
+    </Directory>
+
+    <Directory /var/www>
+        Options Indexes FollowSymLinks MultiViews
+        Require all granted
+        # This directive allows us to have apache2's default start page
+        # in /apache2-default/, but still have / go to the right place
+        #RedirectMatch ^/$ /apache2-default/
+    </Directory>
+
+    <Directory /var/www/services/>
+        Options +FollowSymLinks +ExecCGI
+        AddHandler wsgi-script .py
+    </Directory>
+
+    <Directory /var/www/services/JBrowse/JBrowse_TrackContent_WS/>
+        Options +FollowSymLinks +ExecCGI
+        AddHandler wsgi-script .py
+    </Directory>
+
+    Alias /gobe/ /var/www/gobe/
+    <Directory "/var/www/gobe/">
+        Options +FollowSymLinks +ExecCGI
+        AddHandler wsgi-script .py
+    </Directory>
+
+    WSGIScriptAlias /jex /var/www/services/jex.py
+    ScriptAlias /api/v1/jbrowse/ /var/www/services/service.pl
+    ScriptAlias /api/v1/ /var/www/services/mojolicious/
+    ScriptAlias /cgi-bin/ /var/www/
+    Alias /services/JBrowse/track /var/www/services/JBrowse/JBrowse_TrackContent_WS/source.py
+
+    <Directory "/var/www/web">
+        AllowOverride None
+        Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+        Require all granted
+    </Directory>
+</VirtualHost>

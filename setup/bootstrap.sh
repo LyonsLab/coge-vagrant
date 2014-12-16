@@ -98,3 +98,14 @@ if ! [ -f  /var/log/setup-coge ]; then
 
     touch /var/log/setup-coge
 fi
+
+#: Setup apache
+if ! [ -f /var/log/setup-apache ]; then
+    a2dissite 000-default.conf
+
+    rm -fr /var/www
+    ln -fs /vagrant/setup/coge-apache /etc/apache2/sites-enabled/coge
+    ln -fs /vagrant/coge/web /var/www
+
+    service apache2 restart
+fi

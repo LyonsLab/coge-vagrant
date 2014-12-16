@@ -50,3 +50,36 @@ apt-get update && apt-get install -y \
     python-dev \
     aragorn \
     nodejs &> /dev/null
+
+#: Add node dependencies
+npm install -g bower
+
+#: Setup CPAN
+curl -L http://cpanmin.us | perl - App::cpanminus
+
+#: Setup coge repository
+if ! [ -f  /var/log/setup-coge ]; then
+    cd /vagrant
+    git clone https://github.com/LyonsLab/coge.git
+
+    cd /vagrant/coge
+    #: Install Perl modules
+    cat modules.txt | xargs cpanm
+
+    #: Install javascript modules
+    sudo -u www-data bower install -f
+
+    # Setup directories
+    cd /vagrant/coge/web
+    setup.sh
+
+    #: Install local perl modules
+    cd /vagrant/coge/modules
+    perl Makefile.PL lib=/usr/local/lib/perl/5.18.2/
+    make install
+
+    #: Link config
+    ln -fs /vagrant/setup/coge.conf /var/www/coge.conf
+
+    touch /var/log/setup-coge
+fi

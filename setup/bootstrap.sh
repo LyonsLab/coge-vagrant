@@ -57,6 +57,21 @@ npm install -g bower
 #: Setup CPAN
 curl -L http://cpanmin.us | perl - App::cpanminus
 
+#: Setup mysql database
+if ! [ -f /var/log/setup-database ]; then
+    echo "create user 'coge'@'localhost' IDENTIFIED BY '$PASS'" | mysql -uroot -pdev
+    echo "create database coge" | mysql -uroot -pdev
+    echo "grant all privileges on coge.* to coge" | mysql -uroot -pdev
+    echo "create user 'coge_web'@'localhost' IDENTIFIED BY '$PASS'" | mysql -uroot -pdev
+    echo "grant select on coge.* to coge_web" | mysql -uroot -pdev
+    echo "flush privileges" | mysql -uroot -pdev
+
+    mysql -u root -p $PASS coge < /vagrant/setup/coge-schema.sql &> /dev/null
+    mysql -u root -p $PASS coge < /vagrant/setup/feature_type.sql &> /dev/null
+
+    touch /var/log/setup-database
+fi
+
 #: Setup coge repository
 if ! [ -f  /var/log/setup-coge ]; then
     cd /vagrant

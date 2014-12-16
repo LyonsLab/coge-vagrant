@@ -109,3 +109,34 @@ if ! [ -f /var/log/setup-apache ]; then
 
     service apache2 restart
 fi
+
+#: Setup JEX / CCTools
+if ! [ -f /var/log/setup-jex ]; then
+    #: Install CCTools
+    wget -c "http://ccl.cse.nd.edu/software/files/cctools-4.2.2-source.tar.gz"
+    tar xzvf cctools-4.2.2-source.tar.gz
+    cd cctools-4.2.2
+    ./configure --prefix /usr/local
+    make install
+
+    #: Install Yerba
+    cd /vagrant
+    git clone https://github.com/LyonsLab/Yerba.git
+    ln -s /vagrant/Yerba /opt/Yerba
+    cp /opt/Yerba/yerba.cfg.example /etc/yerba/yerba.cfg
+    sudo -u www-data /opt/Yerba/bin/yerbad --setup
+
+    #: Copy upstart scripts and pool configuration
+    ln -sf /vagrant/setup/work_queue_pool.conf /etc/init/work_queue_pool.conf
+    ln -sf /vagrant/setup/catalog_server.conf /etc/init/catalog_server.conf
+    ln -sf /vagrant/setup/yerba.conf /etc/init/yerba.conf
+    #: This will not be required with cctools 4.3
+    ln -sf /vagrant/setup/pool.conf /etc/yerba/yerba.cfg
+
+    #: Start services
+    start catalog_server
+    start work_queue_pool
+    start yerba
+
+    touch /var/log/setup-jex
+fi

@@ -24,6 +24,14 @@
         Require all granted
     </Directory>
 
+    # Map data and tmp to the public storage directories
+    Alias /data /storage/public/data
+    Alias /tmp /storage/public/tmp
+    <Directory "/storage/public/*/">
+        Options Indexes
+        Require all granted
+    </Directory>
+
     <Directory /var/www>
         Options Indexes FollowSymLinks MultiViews
         Require all granted

@@ -135,6 +135,7 @@ if ! [ -f /var/log/setup-jex ]; then
     ln -sf /vagrant/setup/pool.conf /etc/yerba/yerba.cfg
 
     #: Start services
+    initctl reload-configuration
     start catalog_server
     start work_queue_pool
     start yerba

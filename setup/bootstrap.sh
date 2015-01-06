@@ -124,6 +124,7 @@ if ! [ -f /var/log/setup-jex ]; then
     cd /vagrant
     git clone https://github.com/LyonsLab/Yerba.git
     ln -s /vagrant/Yerba /opt/Yerba
+    pip install -r  /opt/Yerba/requirements.txt
     cp /opt/Yerba/yerba.cfg.example /etc/yerba/yerba.cfg
     sudo -u www-data /opt/Yerba/bin/yerbad --setup
 

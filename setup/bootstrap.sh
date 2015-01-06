@@ -49,6 +49,7 @@ if ! [ -f /var/log/install-packages ]; then
         python-setuptools \
         python-numpy \
         python-dev \
+        python-pip \
         aragorn \
         nodejs &> /dev/null
 

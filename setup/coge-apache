@@ -32,6 +32,11 @@
         #RedirectMatch ^/$ /apache2-default/
     </Directory>
 
+    <Directory /var/www/tmpl>
+        AllowOverride None
+        Require all denied
+    </Directory>
+
     <Directory /var/www/services/>
         Options +FollowSymLinks +ExecCGI
         AddHandler wsgi-script .py

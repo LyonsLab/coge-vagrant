@@ -148,3 +148,10 @@ if ! [ -f /var/log/setup-jex ]; then
 
     touch /var/log/setup-jex
 fi
+
+if ! [ -f /var/log/setup-storage ]; then
+    mkdir -p /storage/public/data /storage/public/tmp
+    chown -R www-data:www-data /storage/public
+
+    touch /var/log/setup-storage
+fi

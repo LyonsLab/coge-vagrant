@@ -1,6 +1,6 @@
 <VirtualHost *:80>
     ServerAdmin webmaster@localhost
-    DocumentRoot /var/www/web
+    DocumentRoot /var/www
 
     <Files ~ "\.(pl|cgi)$">
         SetHandler perl-script
@@ -18,7 +18,7 @@
     ServerSignature On
 
     <Directory />
-        PerlSetEnv COGE_HOME "/var/www/web"
+        PerlSetEnv COGE_HOME "/var/www/"
         AddHandler cgi-script .pl
         Options FollowSymLinks
         Require all granted
@@ -53,10 +53,4 @@
     ScriptAlias /api/v1/ /var/www/services/mojolicious/
     ScriptAlias /cgi-bin/ /var/www/
     Alias /services/JBrowse/track /var/www/services/JBrowse/JBrowse_TrackContent_WS/source.py
-
-    <Directory "/var/www/web">
-        AllowOverride None
-        Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
-        Require all granted
-    </Directory>
 </VirtualHost>

@@ -122,6 +122,7 @@ if ! [ -f /var/log/setup-jex ]; then
 
     #: Install Yerba
     cd /vagrant
+    mkdir -p /etc/yerba
     git clone https://github.com/LyonsLab/Yerba.git
     ln -s /vagrant/Yerba /opt/Yerba
     pip install -r  /opt/Yerba/requirements.txt

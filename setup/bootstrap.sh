@@ -121,7 +121,7 @@ if ! [ -f /var/log/setup-jex ]; then
     rm -rf /vagrant/tmp && mkdir -p /vagrant/tmp && cd /vagrant/tmp
     wget -c "http://ccl.cse.nd.edu/software/files/cctools-4.2.2-source.tar.gz"
     tar xzvf cctools-4.2.2-source.tar.gz
-    cd cctools-4.2.2
+    cd cctools-4.2.2-source
     ./configure --prefix /usr/local
     make install
 

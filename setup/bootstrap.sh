@@ -142,6 +142,11 @@ if ! [ -f /var/log/setup-jex ]; then
     #: This will not be required with cctools 4.3
     ln -sf /vagrant/setup/pool.conf /etc/yerba/yerba.cfg
 
+    # Setup logging directory
+    mkdir -p /storage/yerba
+    chown -R www-data:www-data /storage/yerba
+    ln -sf /storage/yerba /opt/Yerba/log
+
     #: Start services
     initctl reload-configuration
     start catalog_server

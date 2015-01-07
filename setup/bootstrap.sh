@@ -39,6 +39,7 @@ if ! [ -f /var/log/install-packages ]; then
         libapache2-mod-perl2 \
         libapache2-mod-wsgi \
         libzmq3-dev \
+        libperl-dev \
         build-essential \
         njplot \
         imagemagick \

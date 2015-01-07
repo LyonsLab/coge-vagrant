@@ -133,6 +133,7 @@ if ! [ -f /var/log/setup-jex ]; then
     ln -s /vagrant/Yerba /opt/Yerba
     pip install -r  /opt/Yerba/requirements.txt
     cp /opt/Yerba/yerba.cfg.example /etc/yerba/yerba.cfg
+    ln -sf /vagrant/setup/yerba.cfg /etc/yerba/yerba.cfg
     sudo -u www-data /opt/Yerba/bin/yerbad --setup
 
     #: Copy upstart scripts and pool configuration
@@ -140,7 +141,7 @@ if ! [ -f /var/log/setup-jex ]; then
     ln -sf /vagrant/setup/catalog_server.conf /etc/init/catalog_server.conf
     ln -sf /vagrant/setup/yerba.conf /etc/init/yerba.conf
     #: This will not be required with cctools 4.3
-    ln -sf /vagrant/setup/pool.conf /etc/yerba/yerba.cfg
+    ln -sf /vagrant/setup/pool.conf /etc/yerba/work_queue_pool.conf
 
     # Setup logging directory
     mkdir -p /storage/yerba

@@ -298,12 +298,14 @@ CREATE TABLE `genome` (
   `message` text,
   `link` text,
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `creator_id` int(11) NOT NULL,
   PRIMARY KEY (`genome_id`),
   KEY `name` (`name`),
   KEY `organism_id` (`organism_id`),
   KEY `genome_sequence_type_id` (`genomic_sequence_type_id`),
   KEY `version` (`version`,`organism_id`),
-  KEY `restricted` (`restricted`)
+  KEY `restricted` (`restricted`),
+  KEY `creator_id` (`creator_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -790,4 +792,4 @@ CREATE TABLE `workflow` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-22 11:44:53
+-- Dump completed on 2015-01-07 10:46:33

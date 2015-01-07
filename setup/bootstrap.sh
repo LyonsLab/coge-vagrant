@@ -151,8 +151,8 @@ if ! [ -f /var/log/setup-jex ]; then
 fi
 
 if ! [ -f /var/log/setup-storage ]; then
-    mkdir -p /storage/public/data /storage/public/tmp
-    chown -R www-data:www-data /storage/public
+    mkdir -p /storage/public/data /storage/public/tmp /storage/coge
+    chown -R www-data:www-data /storage/public /storage/coge
 
     touch /var/log/setup-storage
 fi

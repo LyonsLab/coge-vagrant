@@ -71,8 +71,8 @@ if ! [ -f /var/log/setup-database ]; then
     echo "grant select on coge.* to coge_web" | mysql -uroot -pdev
     echo "flush privileges" | mysql -uroot -pdev
 
-    mysql -u root -p $PASS coge < /vagrant/setup/coge-schema.sql &> /dev/null
-    mysql -u root -p $PASS coge < /vagrant/setup/feature_type.sql &> /dev/null
+    mysql -uroot -p$PASS coge < /vagrant/setup/coge-schema.sql &> /dev/null
+    mysql -uroot -p$PASS coge < /vagrant/setup/feature_type.sql &> /dev/null
 
     touch /var/log/setup-database
 fi

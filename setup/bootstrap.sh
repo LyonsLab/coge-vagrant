@@ -126,6 +126,10 @@ if ! [ -f /var/log/setup-jex ]; then
     ./configure --prefix /usr/local
     make install
 
+    # Setup yerba data directory
+    mkdir -p /storage/yerba
+    chown -R www-data:www-data /storage/yerba
+
     #: Install Yerba
     cd /vagrant
     mkdir -p /etc/yerba
@@ -140,10 +144,6 @@ if ! [ -f /var/log/setup-jex ]; then
     ln -sf /vagrant/setup/work_queue_pool.conf /etc/init/work_queue_pool.conf
     ln -sf /vagrant/setup/catalog_server.conf /etc/init/catalog_server.conf
     ln -sf /vagrant/setup/yerba.conf /etc/init/yerba.conf
-
-    # Setup yerba data directory
-    mkdir -p /storage/yerba
-    chown -R www-data:www-data /storage/yerba
 
     #: Start services
     initctl reload-configuration

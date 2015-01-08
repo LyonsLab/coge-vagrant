@@ -120,9 +120,9 @@ fi
 if ! [ -f /var/log/setup-jex ]; then
     #: Install CCTools
     rm -rf /vagrant/tmp && mkdir -p /vagrant/tmp && cd /vagrant/tmp
-    wget -c "http://ccl.cse.nd.edu/software/files/cctools-4.2.2-source.tar.gz"
-    tar xzvf cctools-4.2.2-source.tar.gz
-    cd cctools-4.2.2-source
+    wget -c "http://ccl.cse.nd.edu/software/files/cctools-4.3.2-source.tar.gz"
+    tar xzvf cctools-4.3.2-source.tar.gz
+    cd cctools-4.3.2-source
     ./configure --prefix /usr/local
     make install
 
@@ -140,8 +140,6 @@ if ! [ -f /var/log/setup-jex ]; then
     ln -sf /vagrant/setup/work_queue_pool.conf /etc/init/work_queue_pool.conf
     ln -sf /vagrant/setup/catalog_server.conf /etc/init/catalog_server.conf
     ln -sf /vagrant/setup/yerba.conf /etc/init/yerba.conf
-    #: This will not be required with cctools 4.3
-    ln -sf /vagrant/setup/pool.conf /etc/yerba/work_queue_pool.conf
 
     # Setup logging directory
     mkdir -p /storage/yerba

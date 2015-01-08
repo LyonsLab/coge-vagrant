@@ -141,10 +141,9 @@ if ! [ -f /var/log/setup-jex ]; then
     ln -sf /vagrant/setup/catalog_server.conf /etc/init/catalog_server.conf
     ln -sf /vagrant/setup/yerba.conf /etc/init/yerba.conf
 
-    # Setup logging directory
+    # Setup yerba data directory
     mkdir -p /storage/yerba
     chown -R www-data:www-data /storage/yerba
-    ln -sf /storage/yerba /opt/Yerba/log
 
     #: Start services
     initctl reload-configuration

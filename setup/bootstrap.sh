@@ -88,7 +88,7 @@ if ! [ -f  /var/log/setup-coge ]; then
     cat modules.txt | xargs cpanm
 
     #: Install javascript modules
-    sudo -u www-data bower install -f
+    CI=true bower install -f
 
     # Setup directories
     cd /vagrant/coge/web
